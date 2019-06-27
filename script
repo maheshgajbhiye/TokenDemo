@@ -1,0 +1,48 @@
+
+CREATE TABLE Priority
+(
+  id integer,		
+  type character varying(16) NOT NULL UNIQUE,
+  CONSTRAINT pk_priority_1 PRIMARY KEY (id)
+);
+
+CREATE TABLE Customer
+(
+  id serial,		
+  name character varying(32) NOT NULL,
+  accountNumber double precision NOT NULL UNIQUE,
+  priorityId Integer NOT NULL,
+  CONSTRAINT pk_customer_1 PRIMARY KEY (id),
+  CONSTRAINT fk_priorityid_1 FOREIGN KEY (priorityId)
+      REFERENCES Priority (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE TokonInfo
+(
+  id serial,
+  tokenNumber integer NOT NULL UNIQUE,
+  customerid integer NOT NULL,
+  creationDate timestamp without time zone NOT NULL,
+  counterNumber integer,
+  status character varying(1) NOT NULL,
+  CONSTRAINT pk_tokenid_1 PRIMARY KEY (id),
+  CONSTRAINT fk_customerid_1 FOREIGN KEY (customerid)
+      REFERENCES Customer (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE INDEX TokonInfo_index1 ON TokonInfo (id,creationDate,status);
+
+
+INSERT INTO public.priority(id, type) VALUES (1, 'PLATINUM');
+INSERT INTO public.priority(id, type) VALUES (2	, 'GOLD');
+INSERT INTO public.priority(id, type) VALUES (3, 'SILVER');
+
+INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test1', 111100001, 1);
+INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test2', 111100002, 2);
+INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test3', 111100003, 3);
+INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test4', 111100004, 2);
+INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test5', 111100005, 1);
+
+
+
