@@ -18,18 +18,18 @@ public class CustomerController {
 
 	@Autowired
 	CustomerService customerservice;
-	
-	@PostMapping(value="/create",headers="Accept=application/json")
-    public ResponseEntity<Void> createUser(@RequestBody Customer customer){
-        System.out.println("Creating User "+customer.getName());
-        customerservice.createUser(customer);        
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
-    }
-	
-	@PostMapping(value="/addPriority",headers="Accept=application/json")
-    public ResponseEntity<Void> createPriority(@RequestBody Priority priority){
-        System.out.println("Creating User "+priority.getType());
-        customerservice.createPriority(priority);        
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
-    }
+
+	@PostMapping(value = "/create", headers = "Accept=application/json")
+	public ResponseEntity<Void> createUser(@RequestBody Customer customer) {
+		System.out.println("Creating User " + customer.getName());
+		customerservice.createUser(customer);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+
+	@PostMapping(value = "/addPriority", headers = "Accept=application/json")
+	public ResponseEntity<Void> createPriority(@RequestBody Priority priority) {
+		System.out.println("Creating User " + priority.getType());
+		customerservice.createPriority(priority);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
 }

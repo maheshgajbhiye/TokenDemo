@@ -13,6 +13,7 @@ import com.docplexus.Tokendemo.bean.Customer;
 import com.docplexus.Tokendemo.bean.Token;
 import com.docplexus.Tokendemo.dao.CustomerRepository;
 import com.docplexus.Tokendemo.dao.TokenRepository;
+import com.docplexus.common.enums.StatusEnum;
 
 @Service
 @Transactional
@@ -20,20 +21,20 @@ public class TokenServiceImp implements TokenService {
 
 	@Autowired
 	TokenRepository tokenRepository;
-	
+
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	public Token createToken(long accountNumber) {
 		Date date = new Date();
-		Token token=null;
+		Token token = null;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		List<Customer> customers =customerRepository.findByAcountNumber(accountNumber);
-		for(Customer customer : customers) {
-			if( customer!= null) {
+		List<Customer> customers = customerRepository.findByAccountNumber(accountNumber);
+		for (Customer customer : customers) {
+			if (customer != null) {
 				token = new Token();
-				token.setStatus("A"); // Status as Active
+				token.setStatus(StatusEnum.ACTIVE.getStatus()); // Status as Active
 				token.setCreationDate(date);
 				token.setCustomerid(customer.getId());
 
@@ -45,7 +46,7 @@ public class TokenServiceImp implements TokenService {
 					token.setTokenNumber(tokens.size() + 1);
 				}
 				return tokenRepository.saveAndFlush(token);
-			}else {
+			} else {
 				System.out.println("Customer Not exists with Account Number :: " + accountNumber);
 			}
 		}
@@ -59,23 +60,22 @@ public class TokenServiceImp implements TokenService {
 		for (Token token : tokens) {
 			System.out.println("token :: " + token);
 			token.setCounterNumber(counter);
-			token.setStatus("P"); // status as processing
-			tokenRepository.updateTokenStatus(token.getStatus(),token.getId());
-			tokenRepository.updateTokenCounter(token.getCounterNumber(),token.getId());
-			nextToken = token;			
+			token.setStatus(StatusEnum.PROCESSING.getStatus()); // status as processing
+			token.setCounterNumber(counter);
+			tokenRepository.save(token);
+			nextToken = token;
 			break;
 		}
 		System.out.println("nextToken :: " + nextToken);
 		return nextToken;
 	}
-	
+
 	public Token findById(long id) {
 		return tokenRepository.findById(id);
 	}
 
-	public void updateTokenClose(long tokenId) {
-		tokenRepository.updateTokenStatus("C",tokenId); // status as close
+	public void updateToken(Token token, String status) {
+		token.setStatus(status);
 	}
 
-	
 }

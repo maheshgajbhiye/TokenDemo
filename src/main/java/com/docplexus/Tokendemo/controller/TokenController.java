@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.docplexus.Tokendemo.bean.Token;
 import com.docplexus.Tokendemo.service.TokenService;
+import com.docplexus.common.enums.StatusEnum;
 
 @RestController
 @RequestMapping(value = { "/token" })
@@ -35,15 +36,16 @@ public class TokenController {
 		// display token with counter no by socket programming.
 		return new ResponseEntity<Token>(token, HttpStatus.OK);
 	}
+
+	@PutMapping(value = "/update/{tokenId}/{status}", headers = "Accept=application/json")
+	public ResponseEntity<String> updateUser(@PathVariable("tokenId") long tokenId,
+			@PathVariable("status") String status) {
+		Token token = tokenService.findById(tokenId);
+		if (token == null) {
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}
+		tokenService.updateToken(token, StatusEnum.valueOf(status).getStatus());
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
 	
-	@PutMapping(value="/close/{tokenId}", headers="Accept=application/json")
-    public ResponseEntity<String> updateUser(@PathVariable("tokenId") long tokenId)
-    {
-         Token token = tokenService.findById(tokenId);
-        if (token==null) {
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        }
-        tokenService.updateTokenClose(token.getId());
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
 }

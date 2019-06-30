@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Priority implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "id")
 	private int id;

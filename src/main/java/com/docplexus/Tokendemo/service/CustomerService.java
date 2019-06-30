@@ -6,5 +6,6 @@ import com.docplexus.Tokendemo.bean.Priority;
 public interface CustomerService {
 
 	void createUser(Customer customer);
+
 	void createPriority(Priority priority);
 }

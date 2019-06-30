@@ -30,11 +30,10 @@ public class Customer implements Serializable {
 
 	@Column(name = "accountNumber")
 	private long accountNumber;
-	
+
 	@Column(name = "priorityId")
 	private int priorityId;
 
-	
 	public long getAccountNumber() {
 		return accountNumber;
 	}
@@ -71,5 +70,5 @@ public class Customer implements Serializable {
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", priorityId=" + priorityId + "]";
 	}
-	
+
 }
