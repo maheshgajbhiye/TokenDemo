@@ -8,7 +8,7 @@ import com.docplexus.Tokendemo.bean.Customer;
 import com.docplexus.Tokendemo.bean.Priority;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
-	@Query("SELECT name FROM Customer customer WHERE customer.accountNumber=(:accountNumber)")
+	@Query("SELECT customer FROM Customer customer WHERE customer.accountNumber=(:accountNumber)")
 	Customer findByAcountNumber(@Param("accountNumber") long accountNumber);
 
 }
