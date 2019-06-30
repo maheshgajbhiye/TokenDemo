@@ -29,23 +29,25 @@ public class TokenServiceImp implements TokenService {
 		Token token=null;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		Customer customer =customerRepository.findByAcountNumber(accountNumber);
-		if( customer!= null) {
-			token = new Token();
-			token.setStatus("A"); // Status as Active
-			token.setCreationDate(date);
-			token.setCustomerid(customer.getId());
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			List<Token> tokens = tokenRepository.findAllByCreationDate(sdf.format(new Date()));
-			if (null == tokens) {
-				token.setTokenNumber(1);
-			} else {
-				token.setTokenNumber(tokens.size() + 1);
+		List<Customer> customers =customerRepository.findByAcountNumber(accountNumber);
+		for(Customer customer : customers) {
+			if( customer!= null) {
+				token = new Token();
+				token.setStatus("A"); // Status as Active
+				token.setCreationDate(date);
+				token.setCustomerid(customer.getId());
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+				List<Token> tokens = tokenRepository.findAllByCreationDate(sdf.format(new Date()));
+				if (null == tokens) {
+					token.setTokenNumber(1);
+				} else {
+					token.setTokenNumber(tokens.size() + 1);
+				}
+				return tokenRepository.saveAndFlush(token);
+			}else {
+				System.out.println("Customer Not exists with Account Number :: " + accountNumber);
 			}
-			return tokenRepository.saveAndFlush(token);
-		}else {
-			System.out.println("Customer Not exists with Account Number :: " + accountNumber);
 		}
 		return token;
 	}
