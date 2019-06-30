@@ -34,7 +34,7 @@ public class TokenServiceImp implements TokenService {
 		for (Customer customer : customers) {
 			if (customer != null) {
 				token = new Token();
-				token.setStatus(StatusEnum.ACTIVE.getStatus()); // Status as Active
+				token.setStatus(StatusEnum.ACTIVE.getStatus()); 
 				token.setCreationDate(date);
 				token.setCustomerid(customer.getId());
 
@@ -60,7 +60,7 @@ public class TokenServiceImp implements TokenService {
 		for (Token token : tokens) {
 			System.out.println("token :: " + token);
 			token.setCounterNumber(counter);
-			token.setStatus(StatusEnum.PROCESSING.getStatus()); // status as processing
+			token.setStatus(StatusEnum.PROCESSING.getStatus()); 
 			token.setCounterNumber(counter);
 			tokenRepository.save(token);
 			nextToken = token;

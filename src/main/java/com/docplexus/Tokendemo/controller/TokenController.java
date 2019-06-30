@@ -33,7 +33,9 @@ public class TokenController {
 	public ResponseEntity<Token> nextByPriority(@PathVariable("counterId") int counterId) {
 		System.out.println("Assigning Token for counter- " + counterId);
 		Token token = tokenService.nextByPriority(counterId);
-		// display token with counter no by socket programming.
+		if (token == null) {
+			return new ResponseEntity<Token>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<Token>(token, HttpStatus.OK);
 	}
 
@@ -47,5 +49,5 @@ public class TokenController {
 		tokenService.updateToken(token, StatusEnum.valueOf(status).getStatus());
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 }

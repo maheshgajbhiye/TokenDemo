@@ -16,9 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Customer implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -68,7 +65,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", priorityId=" + priorityId + "]";
+		return "Customer [id=" + id + ", name=" + name + ", accountNumber=" +accountNumber+ ", priorityId=" + priorityId + "]";
 	}
 
 }

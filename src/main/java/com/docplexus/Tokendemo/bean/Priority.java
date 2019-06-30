@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "Priority")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Priority implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,5 +37,10 @@ public class Priority implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	@Override
+	public String toString() {
+		return "Priority [id=" +id+ ", type=" +type+ "]";
 	}
 }
