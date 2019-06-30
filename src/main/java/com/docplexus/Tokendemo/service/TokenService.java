@@ -1,8 +1,5 @@
 package com.docplexus.Tokendemo.service;
 
-import java.util.List;
-
-import com.docplexus.Tokendemo.bean.Customer;
 import com.docplexus.Tokendemo.bean.Token;
 
 public interface TokenService {

@@ -34,15 +34,15 @@ CREATE TABLE TokonInfo
 CREATE INDEX TokonInfo_index1 ON TokonInfo (id,creationDate,status);
 
 
-INSERT INTO public.priority(id, type) VALUES (1, 'PLATINUM');
-INSERT INTO public.priority(id, type) VALUES (2	, 'GOLD');
-INSERT INTO public.priority(id, type) VALUES (3, 'SILVER');
+INSERT INTO Priority(id, type) VALUES (1, 'PLATINUM');
+INSERT INTO Priority(id, type) VALUES (2, 'GOLD');
+INSERT INTO Priority(id, type) VALUES (3, 'SILVER');
 
-INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test1', 111100001, 1);
-INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test2', 111100002, 2);
-INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test3', 111100003, 3);
-INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test4', 111100004, 2);
-INSERT INTO public.customer(name, accountNumber, priorityId) VALUES ( 'test5', 111100005, 1);
+INSERT INTO Customer(id, name, accountNumber, priorityId) VALUES (1, 'test1', 111100001, 1);
+INSERT INTO Customer(id, name, accountNumber, priorityId) VALUES (2, 'test2', 111100002, 2);
+INSERT INTO Customer(id, name, accountNumber, priorityId) VALUES (3, 'test3', 111100003, 3);
+INSERT INTO Customer(id, name, accountNumber, priorityId) VALUES (4, 'test4', 111100004, 2);
+INSERT INTO Customer(id, name, accountNumber, priorityId) VALUES (5, 'test5', 111100005, 1);
 
 
 

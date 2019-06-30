@@ -11,8 +11,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>{
 	@Query("SELECT name FROM Customer customer WHERE customer.accountNumber=(:accountNumber)")
 	Customer findByAcountNumber(@Param("accountNumber") long accountNumber);
 
-	void addCustomer(Customer customer);
-
-	void addPriority(Priority priority);
-
 }

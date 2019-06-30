@@ -1,5 +1,7 @@
 package com.docplexus.Tokendemo.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "Priority")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Priority {
+public class Priority implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "id")
